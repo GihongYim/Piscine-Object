@@ -3,15 +3,27 @@
 
 struct Account
 {
-	int id;
+private:
+	const int id;
 	int value;
 
-
-	Account() :
-		id(-1),
-		value(0)
+public:
+	Account() : id(-1), value(0)
 	{
 	
+	}
+
+	const int getId() {
+		return this->id;
+	}
+
+	int getValue() {
+		return this->value;
+	}
+
+
+	void setValue(int newValue) {
+		this->value = newValue;
 	}
 
 	friend std::ostream& operator << (std::ostream& p_os, const Account& p_account)
@@ -23,13 +35,27 @@ struct Account
 
 struct Bank
 {
+private:
 	int liquidity;
 	std::vector<Account *> clientAccounts;
 
-	Bank() :
-		liquidity(0)
+
+public:
+	Bank() : liquidity(0)
 	{
 
+	}
+
+	int getLiquidity() {
+		return this->liquidity;
+	}
+
+	void setLiquidity(int newLiquidity) {
+		this->liquidity = newLiquidity;
+	}
+
+	void addCliendAccount(Account * newAccount) {
+		this->clientAccounts.push_back(newAccount);
 	}
 
 	friend std::ostream& operator << (std::ostream& p_os, const Bank& p_bank)
@@ -37,7 +63,7 @@ struct Bank
 		p_os << "Bank informations : " << std::endl;
 		p_os << "Liquidity : " << p_bank.liquidity << std::endl;
 		for (auto &clientAccount : p_bank.clientAccounts)
-        p_os << *clientAccount << std::endl;
+        	p_os << *clientAccount << std::endl;
 		return (p_os);
 	}
 };
@@ -45,20 +71,23 @@ struct Bank
 int main()
 {
 	Account accountA = Account();
-	accountA.id = 0;
-	accountA.value = 100;
+	accountA.setId(0);
+	accountA.setValue(100);
 
 	Account accountB = Account();
-	accountB.id = 1;
-	accountB.value = 100;
+	accountB.setId(1);
+	accountB.setValue(100);
 
 	Bank bank = Bank();
-	bank.liquidity = 999;
-	bank.clientAccounts.push_back(&accountA);
-	bank.clientAccounts.push_back(&accountB);
+	bank.setLiquidity(999);
+	bank.addCliendAccount(&accountA);
+	bank.addCliendAccount(&accountB);
 
-	bank.liquidity -= 200;
-	accountA.value += 400;
+
+	// bank.liquidity -= 200;
+	// accountA.value += 400;
+
+
 
 	std::cout << "Account : " << std::endl;
 	std::cout << accountA << std::endl;
