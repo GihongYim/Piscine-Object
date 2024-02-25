@@ -8,9 +8,9 @@ private:
 	int value;
 
 public:
-	Account() : id(-1), value(0)
+	Account(int id) : id(id), value(0)
 	{
-	
+
 	}
 
 	const int getId() {
@@ -21,9 +21,21 @@ public:
 		return this->value;
 	}
 
-
 	void setValue(int newValue) {
 		this->value = newValue;
+	}
+
+	void deposit(int value) {
+		this->value+= value;
+	}
+
+	bool withdraw(int value) {
+		if (value > this->value) {
+			return false;
+		} else {
+			this->value -= value;
+			return true;
+		}
 	}
 
 	friend std::ostream& operator << (std::ostream& p_os, const Account& p_account)
@@ -38,12 +50,13 @@ struct Bank
 private:
 	int liquidity;
 	std::vector<Account *> clientAccounts;
+	static int account_index;
 
 
 public:
 	Bank() : liquidity(0)
 	{
-
+		account_index = 0;
 	}
 
 	int getLiquidity() {
@@ -54,8 +67,17 @@ public:
 		this->liquidity = newLiquidity;
 	}
 
-	void addCliendAccount(Account * newAccount) {
-		this->clientAccounts.push_back(newAccount);
+	void createAccount() {
+		Account newAccount = Account(account_index++);
+		this->clientAccounts.push_back(&newAccount);
+	}
+
+	bool withdraw(int id, int value) {
+
+	}
+
+	void deposit(int value) {
+
 	}
 
 	friend std::ostream& operator << (std::ostream& p_os, const Bank& p_bank)
@@ -70,18 +92,19 @@ public:
 
 int main()
 {
-	Account accountA = Account();
-	accountA.setId(0);
-	accountA.setValue(100);
+	// Account accountA = Account();
+	// accountA.setId(0);
+	// accountA.setValue(100);
 
-	Account accountB = Account();
-	accountB.setId(1);
-	accountB.setValue(100);
+	// Account accountB = Account();
+	// accountB.setId(1);
+	// accountB.setValue(100);
 
-	Bank bank = Bank();
-	bank.setLiquidity(999);
-	bank.addCliendAccount(&accountA);
-	bank.addCliendAccount(&accountB);
+
+	// Bank bank = Bank();
+	// bank.setLiquidity(999);
+	// bank.addCliendAccount(&accountA);
+	// bank.addCliendAccount(&accountB);
 
 
 	// bank.liquidity -= 200;
