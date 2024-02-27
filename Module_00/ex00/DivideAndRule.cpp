@@ -67,17 +67,42 @@ public:
 		this->liquidity = newLiquidity;
 	}
 
-	void createAccount() {
+	int createAccount() {
 		Account newAccount = Account(account_index++);
 		this->clientAccounts.push_back(&newAccount);
+		return newAccount.getId();
 	}
 
 	bool withdraw(int id, int value) {
-
+		Account *account = NULL;
+		for (int i = 0; i < this->clientAccounts.size(); i++) {
+			if (clientAccounts[i]->getId() == id) {
+				account = clientAccounts[i];
+				break;
+			}
+		}
+		if (account == NULL) {
+			std::cout << id << " account not found" << std::endl;
+			return;
+		}
+		if (!account->withdraw(value)) {
+			std::cout << "Not Enough money" << std::endl;
+		}
 	}
 
-	void deposit(int value) {
-
+	void deposit(int id, int value) {
+		Account *account = NULL;
+		for (int i = 0; i < this->clientAccounts.size(); i++) {
+			if (clientAccounts[i]->getId() == id) {
+				account = clientAccounts[i];
+				break;
+			}
+		}
+		if (account == NULL) {
+			std::cout << id << " account not found" << std::endl;
+			return;
+		}
+		account->deposit(value)
 	}
 
 	friend std::ostream& operator << (std::ostream& p_os, const Bank& p_bank)
@@ -92,23 +117,17 @@ public:
 
 int main()
 {
-	// Account accountA = Account();
-	// accountA.setId(0);
-	// accountA.setValue(100);
+	Bank bank = Bank();
+	
+	int accountA;
+	accountA = bank.createAccount();
+	bank.deposit(accountA, 100);
 
-	// Account accountB = Account();
-	// accountB.setId(1);
-	// accountB.setValue(100);
-
-
-	// Bank bank = Bank();
-	// bank.setLiquidity(999);
-	// bank.addCliendAccount(&accountA);
-	// bank.addCliendAccount(&accountB);
+	int accountB;
+	accountB = bank.createAccount();
+	bank.deposit(accountB, 100);
 
 
-	// bank.liquidity -= 200;
-	// accountA.value += 400;
 
 
 
