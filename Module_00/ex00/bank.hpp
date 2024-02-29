@@ -7,23 +7,27 @@
 
 class Bank
 {
-    private:
+private:
 	int liquidity;
 	std::vector<Account *> clientAccounts;
-	static int account_index;
+	int account_index;
 public:
-	Bank();
+	Bank(int liquidity);
 
-	int getLiquidity();
-	void setLiquidity(int newLiquidity);
+	int getLiquidity() const;
+	void addLiquidity(int newLiquidity);
 
 	int createAccount();
+	void deleteAccount(int id);
+	std::vector<Account *> getAllAccounts() const;
+	Account getClientAccount(int id) const;
 
 	bool withdraw(int id, int value);
-
 	void deposit(int id, int value);
+	void lend(int id, int value);
+	void receiveLoan(int id, int value);
 
-	friend std::ostream& operator << (std::ostream& p_os, const Bank& p_bank);
 };
 
+std::ostream& operator<< (std::ostream& p_os, const Bank& p_bank);
 #endif

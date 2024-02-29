@@ -1,16 +1,16 @@
 #include "Account.hpp"
 
 
-Account::Account(int id) : id(id), value(0)
+Account::Account(int id) : id(id), value(0), loan(0)
 {
 
 }
 
-const int Account::getId() {
+int Account::getId() const {
 	return this->id;
 }
 
-int Account::getValue() {
+int Account::getValue() const {
 	return this->value;
 }
 
@@ -31,8 +31,20 @@ bool Account::withdraw(int value) {
 	}
 }
 
+void Account::addloan(int value) {
+	this->loan += value;
+}
+
+void Account::offloan(int value) {
+	if (value > this->loan) {
+		std::cout << "loan is less than money that you gave (your loan: " << this->loan << ")" << std::endl;
+		return ;
+	}
+	this->loan -= value;
+}
+
 std::ostream& operator << (std::ostream& p_os, const Account& p_account)
 {
-	p_os << "[" << p_account.id << "] - [" << p_account.value << "]";
+	p_os << "[" << p_account.getId() << "] - [" << p_account.getValue() << "]";
 	return (p_os);
 }

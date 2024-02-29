@@ -8,13 +8,14 @@ class Account
 private:
 	const int id;
 	int value;
+	int loan;
 
 public:
 	Account(int id);
 
-	const int getId();
+	int getId() const;
 
-	int getValue();
+	int getValue() const;
 
 	void setValue(int newValue);
 
@@ -22,8 +23,11 @@ public:
 
 	bool withdraw(int value);
 
-	friend std::ostream& operator << (std::ostream& p_os, const Account& p_account);
-};
+	void addloan(int value);
 
+	void offloan(int value);
+
+};
+std::ostream& operator << (std::ostream& p_os, const Account& p_account);
 
 #endif
