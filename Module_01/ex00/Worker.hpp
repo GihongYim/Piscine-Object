@@ -1,13 +1,14 @@
+#include <vector>
 #include "Position.hpp"
 #include "Statistic.hpp"
-#include "Shovel.hpp"
+#include "Tool.hpp"
 class Worker {
 
 private:
     Position position;
     Statistic statistic;
-    Shovel *shovel;
+    std::vector<Tool*> tools;
 public:
-    void getShovel(Shovel *shovel);
-    void dropShovel(Shovel *shovel);
+    void getTool(Tool *tool);
+    void dropTool(Tool *tool);
 };
