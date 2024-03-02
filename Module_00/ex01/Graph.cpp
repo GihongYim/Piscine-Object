@@ -14,8 +14,9 @@ Graph::~Graph() {
     delete this->map;
 }
 
-void Graph::addPoint(struct Vector2 v) {
-    this->vector2List.push_back(v);
+void Graph::addPoint(float x, float y) {
+    struct Vector2 newPoint(x, y);
+    this->vector2List.push_back(newPoint);
 }
 
 void Graph::displayGraph() {

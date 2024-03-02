@@ -1,5 +1,5 @@
 struct Vector2 {
-    float X, Y;
+    float x, y;
 
-    Vector2(float _x, float _y) : X(_x), Y(_y) {}
+    Vector2(float _x, float _y) : x(_x), y(_y) {}
 }

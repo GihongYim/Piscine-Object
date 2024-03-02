@@ -15,7 +15,7 @@ private:
 public:
     Graph(int _size);
 
-    void addPoint(struct Vector2 v);
+    void addPoint(float x, float y);
     void displayGraph();
 };
 #endif
