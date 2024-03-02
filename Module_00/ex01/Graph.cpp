@@ -20,12 +20,9 @@ Graph::~Graph() {
     delete this->map;
 }
 
-void Graph::addPoint(float x, float y) {
-    int intX = static_cast<int> (x);
-    int intY = static_cast<int> (y);
-    struct Vector2 newPoint(x, y);
-    this->vector2List.push_back(newPoint);
-    this->map[intX][intY] = 'X';
+void Graph::addPoint(struct Vector2 point) {
+    this->vector2List.push_back(point);
+    this->map[static_cast<int>(point.x)][static_cast<int>(point.y)] = 'X';
 }
 
 void Graph::displayGraph() {

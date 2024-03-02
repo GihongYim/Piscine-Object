@@ -8,14 +8,14 @@
 class Graph {
 private:
     int size;
-    std::list<struct Vector2> vector2List;
+    std::list<t_Vector2> vector2List;
     char **map;
 
     Graph();
 public:
     Graph(int _size);
     ~Graph();
-    void addPoint(float x, float y);
+    void addPoint(t_Vector2 vec);
     void displayGraph();
 };
 #endif
