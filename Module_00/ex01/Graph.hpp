@@ -14,7 +14,7 @@ private:
     Graph();
 public:
     Graph(int _size);
-
+    ~Graph();
     void addPoint(float x, float y);
     void displayGraph();
 };

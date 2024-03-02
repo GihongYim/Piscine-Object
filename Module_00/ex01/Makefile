@@ -1,9 +1,9 @@
-NAME	=	divide_and_conquer
+NAME	=	graph
 CXX		=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror
 STD98	= 	-std=c++98
 
-SRCS = 
+SRCS = Vector2.cpp Graph.cpp main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
