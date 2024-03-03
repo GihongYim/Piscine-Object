@@ -17,5 +17,5 @@ void Worker::dropTool(Tool *tool) {
 }
 
 void Worker::work() {
-
+    std::cout << "Worker : work" << std::endl;
 }

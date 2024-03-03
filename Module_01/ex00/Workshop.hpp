@@ -1,7 +1,9 @@
 #pragma once
 
-#include "Worker.hpp"
+#include <iostream>
 #include <vector>
+#include <algorithm>
+#include "Worker.hpp"
 
 class Workshop {
 
@@ -10,6 +12,6 @@ private:
 public:
     void addWorker(Worker *worker);
     void addWorker(std::vector<Worker *> workers);
-    void dropWorker();
+    void dropWorker(Worker *worker);
     void excuteWorkDay();
 };
