@@ -14,5 +14,5 @@ private:
 public:
     void getTool(Tool *tool);
     void dropTool(Tool *tool);
-    void work();    
+    void work();
 };
