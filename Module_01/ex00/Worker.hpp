@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector>
 #include "Position.hpp"
 #include "Statistic.hpp"
@@ -11,4 +13,5 @@ private:
 public:
     void getTool(Tool *tool);
     void dropTool(Tool *tool);
+    void work();    
 };

@@ -1,3 +1,4 @@
+#pragma once
 #include "Tool.hpp"
 #include "Worker.hpp"
 

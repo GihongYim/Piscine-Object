@@ -1,3 +1,4 @@
+#pragma once
 typedef struct s_Statistic {
     int level;
     int exp;
