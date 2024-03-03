@@ -6,9 +6,8 @@
 class Shovel : public Tool {
 
 private:
-    int numberOfUses;
-    Worker *owner;
+
 public:
-    Shovel(int numberOfUses);
-    void use() const = 0;
+    Shovel();
+    void use() = 0;
 };

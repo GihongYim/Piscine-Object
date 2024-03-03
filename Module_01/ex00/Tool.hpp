@@ -1,9 +1,14 @@
 #pragma once
+
+#include "Worker.hpp"
+
 class Tool {
 
 protected:
     int numberOfUses;
-
+    Worker *owner;
 public:
-    virtual void use() const = 0;
+
+    void changeOwner(Worker *newOwner);
+    virtual void use() = 0;
 };
