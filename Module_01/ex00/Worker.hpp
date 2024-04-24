@@ -16,6 +16,7 @@ private:
     Statistic statistic;
     std::vector<Tool*> tools;
 public:
+    ~Worker();
     void getTool(Tool *tool);
     void dropTool(Tool *tool);
     void work();    
