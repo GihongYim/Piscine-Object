@@ -4,6 +4,7 @@ Worker::~Worker() {
     for (int i = 0; i < this->tools.size(); i++) {
         tools[i]->changeOwner(NULL);
     }
+    this->leaveWorkshop();
 }
 
 void Worker::getTool(Tool *tool) {
@@ -23,5 +24,17 @@ void Worker::dropTool(Tool *tool) {
 }
 
 void Worker::work() {
-    std::cout << "Worker : work" << std::endl;
+    if (!this->workshop) {
+        std::cout << "Worker : worker can not work since not in workshop" << std::endl;
+    } else {
+        std::cout << "Worker : work" << std::endl;
+    }
+}
+
+void Worker::leaveWorkshop() {
+    if (!this->workshop) {
+        std::cerr << "worker.leaveWorkshop: worker not in workshop" << std::endl;
+    } else {
+        this->workshop->dropWorker(this);
+    }
 }
