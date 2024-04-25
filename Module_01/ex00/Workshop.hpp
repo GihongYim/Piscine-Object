@@ -8,7 +8,6 @@
 class Workshop {
 
 private:
-    
     std::vector<Worker *>workList;
 public:
     void addWorker(Worker *worker);
