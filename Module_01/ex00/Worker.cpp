@@ -38,3 +38,14 @@ void Worker::leaveWorkshop() {
         this->workshop->dropWorker(this);
     }
 }
+
+
+template <class ToolType>
+ToolType*   Worker::getTool() {
+    for (int i = 0; i < this->tools.size(); i++) {
+        if (dynamic_cast<ToolType*>(tools[i]) != NULL) {
+            return dynamic_cast<ToolType*>(tools[i]);
+        }
+    }
+    return NULL;
+}

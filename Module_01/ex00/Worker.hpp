@@ -19,8 +19,11 @@ private:
     Workshop    *workshop;
 public:
     ~Worker();
-    void getTool(Tool *tool);
-    void dropTool(Tool *tool);
-    void work();
-    void leaveWorkshop();
+    void    getTool(Tool *tool);
+    void    dropTool(Tool *tool);
+    void    work();
+    void    leaveWorkshop();
+    template <class ToolType>
+    ToolType*   getTool();
+
 };
