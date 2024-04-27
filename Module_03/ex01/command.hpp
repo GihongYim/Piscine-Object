@@ -9,17 +9,5 @@ protected:
     std::string articles;
 
 public:
-    int get_total_price();
-};
-
-class TuesdayDiscountCommand : protected Command
-{
-public:
-    int get_total_price();
-};
-
-class PackageReductionDiscountCommand : protected Command
-{
-public:
-    int get_total_price();
+    virtual int get_total_price();
 };
