@@ -64,9 +64,17 @@ void Wheel::straighten_wheels() {
     this->_angle = 0;
 }
 
-void Break::apply_force_on_brakes(int force) {
+Break::Break() : _force(0), _maxForce(10)
+{
 
 }
+
+void Break::apply_force_on_brakes(int force) {
+    if (force > this->_maxForce)
+        this->_force = this->_maxForce;
+    else
+        this->_force = force;
+}
 void Break::apply_emergency_brakes() {
-    
+    this->_force = this->_maxForce;
 }
