@@ -1,5 +1,7 @@
 // Single responsability
 
+#include <iostream>
+
 class Car
 {
 private:
@@ -13,7 +15,7 @@ public:
 class Engine
 {
 private:
-	int speed;
+	int _speed;
 public:
 	void accelerate(int speed);
 	void reverse();
@@ -22,7 +24,7 @@ public:
 class Power
 {
 private:
-	bool power;
+	bool _power;
 public:
 	void start();
 	void stop();
@@ -31,9 +33,13 @@ public:
 class Gear
 {
 private:
-	int gear;
-	int maxGear;
+	// gear == 0 : N
+	// gear == -1 : back
+	int _gear;
+	int _maxGear;
 public:
+	Gear();
+	Gear(int numOfGear);
 	void shift_gears_up();
 	void shift_gears_down();
 };
@@ -41,8 +47,12 @@ public:
 class Wheel
 {
 private: 
-	int angle;
+	int _minAngle;
+	int _maxAngle;
+	int _angle;
 public:
+	Wheel();
+	Wheel(int availAngle);
 	void turnWheel(int angle);
 	void straighten_wheels();
 };
@@ -50,7 +60,7 @@ public:
 class Break
 {
 private:
-	int force;
+	int _force;
 public:
 	void apply_force_on_brakes(int force);
 	void apply_emergency_brakes();
