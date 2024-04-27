@@ -1,3 +1,5 @@
+// Single responsability
+
 class Car
 {
 private:
