@@ -63,6 +63,7 @@ private:
 	int _force;
 	int _maxForce;
 public:
+	Break();
 	void apply_force_on_brakes(int force);
 	void apply_emergency_brakes();
 };
