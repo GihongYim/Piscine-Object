@@ -6,11 +6,19 @@
 class Rectangle : public Shape
 {
 private:
-    double width;
-    double height; 
+    double _width;
+    double _height; 
 public:
-    double calculateArea();
-    double calculatePerimeter();
+    Rectangle(double width, double height)
+    {
+        if (width < 0 || height < 0) {
+            throw "width, height should be positive number";
+        }
+        _width = width;
+        _height = height;
+    }
+    double calculateArea() { return _width * _height; }
+    double calculatePerimeter() { return 2 * (_width + _height);}
 };
 
 #endif
