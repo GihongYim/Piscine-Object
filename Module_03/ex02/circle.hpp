@@ -2,12 +2,14 @@
 #define __CIRCLE_HPP__
 
 #include "shape.hpp"
-
+#include <cmath>
 class Circle : public Shape
 {
 private:
     double          _radius;
-    const double    PI = 3.14159265358979323846264338327950288;
+    // const double    PI = 3.14159265358979323846264338327950288;
+    const double    PI = M_PI;
+
 public:
     Circle(double radius) {
         if (radius < 0.0) {

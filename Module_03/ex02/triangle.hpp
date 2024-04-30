@@ -6,18 +6,18 @@
 class Triangle : public Shape
 {
 private:
-    double _width;
-    double _height;
+    double _a, _b, _c;
 public:
-    Triangle(double width, double height) {
-        if (width < 0.0 || height < 0.0) {
-            throw "width, height should be positive number";
+    Triangle(double a, double b, double c) {
+        if (a < 0.0 || b < 0.0 || c < 0.0) {
+            throw "number should be positive number";
         }
-        _width = width;
-        _height = height;
+        _a = a;
+        _b = b;
+        _c = c;
     }
     double calculateArea() {
-        return 0.5 * _width * _height;
+        return 0.0;
     }
 
     double calculatePerimeter() {
