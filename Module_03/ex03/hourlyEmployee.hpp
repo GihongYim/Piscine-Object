@@ -4,7 +4,7 @@
 class IHourlyEmployee
 {
 public:
-    virtual void registerWorkHour(int hour);
+    virtual void registerWorkingHour(int hour);
 };
 
 #endif
