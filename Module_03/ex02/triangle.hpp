@@ -17,11 +17,12 @@ public:
         _c = c;
     }
     double calculateArea() {
+        double s = (_a + _b + _c) / 2.0;
         return 0.0;
     }
 
     double calculatePerimeter() {
-        return 0.0;   
+        return _a + _b + _c;   
     }
 };
 
