@@ -5,7 +5,6 @@ class Employee
 {
 private:
     int hourlyValue;
-
 public:
     int excuteWorkday(){
 
