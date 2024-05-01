@@ -6,23 +6,30 @@
 class Triangle : public Shape
 {
 private:
-    double _a, _b, _c;
+    double _side1, _side2, _side3, _base, _height;
 public:
-    Triangle(double a, double b, double c) {
-        if (a < 0.0 || b < 0.0 || c < 0.0) {
+    Triangle(double side1, double side2, double side3, double base, double height) {
+        if (side1 < 0.0 || side2 < 0.0 || side3 < 0.0 || base < 0.0 || height < 0.0) {
             throw "number should be positive number";
         }
-        _a = a;
-        _b = b;
-        _c = c;
+        if (side1 > side2 || side2 > side3 || side1 > side3) {
+            throw "sides should be increasing";
+        }
+        if (side1 + side2 >= side3) {
+            throw "side3 > side1 + side2 : is not triangle";
+        }
+        _side1 = side1;
+        _side2 = side2;
+        _side3 = side3;
+        _base = base;
+        _height = height;
     }
-    double calculateArea() {
-        double s = (_a + _b + _c) / 2.0;
-        return 0.0;
+    virtual double calculateArea() const {
+        return 0.5 * _base * _height;
     }
 
-    double calculatePerimeter() {
-        return _a + _b + _c;   
+    virtual double calculatePerimeter() const {
+        return _side1 + _side2 + _side3;
     }
 };
 

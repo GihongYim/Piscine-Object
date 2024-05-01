@@ -3,12 +3,11 @@
 
 #include "shape.hpp"
 
-
 class Circle : public Shape
 {
 private:
-    double          _radius;
-    const double    PI = 3.14159265358979323846264338327950288;
+    double                  _radius;
+    static const double     PI;
 
 public:
     Circle(double radius) {
@@ -17,12 +16,14 @@ public:
         }
         _radius = radius;
     }
-    double calculateArea() {
+    double calculateArea() const {
         return PI * _radius * _radius;
     }
-    double getPerimeter() {
+    double calculatePerimeter() const {
         return 2 * PI * _radius * _radius;
     }
 };
+
+const double Circle::PI = 3.14159265358979323846264338327950288;
 
 #endif

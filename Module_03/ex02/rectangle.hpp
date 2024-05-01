@@ -17,8 +17,8 @@ public:
         _width = width;
         _height = height;
     }
-    double calculateArea() { return _width * _height; }
-    double calculatePerimeter() { return 2 * (_width + _height);}
+    double calculateArea() const { return _width * _height; }
+    double calculatePerimeter() const { return 2 * (_width + _height);}
 };
 
 #endif
