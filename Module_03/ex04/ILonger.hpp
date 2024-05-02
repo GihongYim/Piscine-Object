@@ -5,9 +5,9 @@
 
 class ILogger
 {
-
 public:
     virtual void write(std::string) = 0;
+    virtual ~ILogger();
 };
 
 #endif
