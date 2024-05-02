@@ -4,9 +4,9 @@
 #include <fstream>
 #include "ILonger.hpp"
 
-class Filelogger : public ILogger
+class Filelogger : protected ILogger
 {
-private:
+protected:
     std::string     _filename;
     std::ofstream   fout;
 public:

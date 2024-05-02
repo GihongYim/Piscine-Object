@@ -7,7 +7,7 @@
 class OstreamLogger : public ILogger
 {
 public:
-    OstreamLogger(std::string name) : ILogger(name) {}
+    OstreamLogger(std::string name="ostreamlogger") : ILogger(name) {}
     ~OstreamLogger() {}
     void write(std::string log) {
         time_t timer = time(NULL);
