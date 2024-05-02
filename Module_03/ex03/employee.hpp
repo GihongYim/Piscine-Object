@@ -9,7 +9,9 @@ class Employee
 protected:
     int hourlyValue;
 public:
-    int excuteWorkday(){ }
+    virtual ~Employee() {}
+    virtual int excuteWorkday() = 0;
+    
 };
 
 class TempWorker: protected Employee, IHourlyEmployee
