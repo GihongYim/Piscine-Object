@@ -4,26 +4,27 @@
 #include <fstream>
 #include "ILonger.hpp"
 
-class Filelogger : protected ILogger
+class Filelogger : public ILogger
 {
 protected:
     std::string     _filename;
-    std::ofstream   fout;
+    std::ofstream   _fout;
 public:
-    Filelogger(std::string name="FileLogger",std::string filename): ILogger(name), _filename(filename)
+    Filelogger(std::string name="FileLogger",std::string filename="logfile.txt")
+        : ILogger(name), _filename(filename)
     {
-        fout.open(filename);
+        _fout.open(filename);
     }
     ~Filelogger() {
-        fout.close();
+        _fout.close();
     }
     void write(std::string log) {
         time_t timer = time(NULL);
         struct tm* t = localtime(&timer);
-        fout << "[" <<  ILogger::_name << ":";
-        fout << t->tm_year << '-' << t->tm_mon << '-' << t->tm_mday << '-';
-        fout << t->tm_hour << '-' << t->tm_min << '-' << t->tm_sec << "] : ";
-        fout << log << std::endl;
+        _fout << "[" <<  ILogger::_name << ":";
+        _fout << t->tm_year + 1900 << '/' << t->tm_mon << '/' << t->tm_mday << '/';
+        _fout << t->tm_hour << '/' << t->tm_min << '/' << t->tm_sec << "] : ";
+        _fout << log << std::endl;
     }
 };
 
