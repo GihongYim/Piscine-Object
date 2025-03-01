@@ -1,7 +1,7 @@
-NAME	=	divide_and_conquer
-CXX		=	c++
-CXXFLAGS	=	-Wall -Wextra -Werror
-STD98	= 	-std=c++98
+NAME	 =	divide_and_conquer
+CXX		 =	c++
+CXXFLAGS = -Wall -Wextra -Werror
+STD98	 = 	-std=c++98
 
 SRCS = Account.cpp Bank.cpp main.cpp
 
