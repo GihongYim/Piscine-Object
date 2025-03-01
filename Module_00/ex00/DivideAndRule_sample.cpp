@@ -4,7 +4,7 @@
 struct Account
 {
 	int id;
-	int value;
+	double value;
 
 
 	Account() :

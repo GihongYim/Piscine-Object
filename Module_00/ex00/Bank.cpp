@@ -2,7 +2,7 @@
 
 Bank::Bank(int liquidity) : liquidity(liquidity), account_index(0)
 {
-	// account_index = 0;
+	
 }
 
 int Bank::getLiquidity() const {
@@ -97,7 +97,7 @@ void Bank::deposit(int id, int value) {
 		std::cout << id << " account not found" << std::endl;
 		return;
 	}
-	charge = value / 20;
+	charge = (int)((double)value * 0.05);
 	this->addLiquidity(charge);
 	account->deposit(value - charge);
 }
