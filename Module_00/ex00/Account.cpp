@@ -1,25 +1,38 @@
 #include "Account.hpp"
 
-
-Account::Account(int id) : id(id), value(0), loan(0)
+Account::Account(): id(-1), value(0), loan(0)
 {
 
 }
 
-int Account::getId() const {
-	return this->id;
+Account::Account(int id): id(id), value(0), loan(0)
+{
+
 }
 
-int Account::getValue() const {
-	return this->value;
+const int& Account::getId() const
+{
+    return this->id;
 }
 
-void Account::setValue(int newValue) {
-	this->value = newValue;
+const int& Account::getValue() const
+{
+    return this->value;
 }
 
-void Account::deposit(int value) {
-	this->value+= value;
+const int& Account::getLoan() const
+{
+    return this->loan;
+}
+
+void Account::setValue(int value)
+{
+    this->value = value;
+}
+
+void Account::deposit(int value)
+{
+    this->value += value;
 }
 
 bool Account::withdraw(int value) {
@@ -31,12 +44,12 @@ bool Account::withdraw(int value) {
 	}
 }
 
-void Account::addloan(int value) {
-	this->loan += value;
+void Account::addLoan(int value) {
+    this->loan += value;
 }
 
-void Account::offloan(int value) {
-	if (value > this->loan) {
+void Account::offLoan(int value){
+    if (value > this->loan) {
 		std::cout << "loan is less than money that you gave (your loan: " << this->loan << ")" << std::endl;
 		return ;
 	}
@@ -45,6 +58,6 @@ void Account::offloan(int value) {
 
 std::ostream& operator << (std::ostream& p_os, const Account& p_account)
 {
-	p_os << "[" << p_account.getId() << "] - [" << p_account.getValue() << "]";
-	return (p_os);
+    p_os << "[" << p_account.getId() << "] - [" << p_account.getValue() << "] - [" << p_account.getLoan() << "]";
+    return (p_os);
 }
