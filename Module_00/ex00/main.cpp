@@ -18,8 +18,8 @@ int main()
     bank.deposit(accountA, 400);
 
     std::cout << "Account: " << std::endl;
-    std::cout << bank.getClientAccount(accountA) << std::endl;
-    std::cout << bank.getClientAccount(accountB) << std::endl;
+    std::cout << *bank.getClientAccount(accountA) << std::endl;
+    std::cout << *bank.getClientAccount(accountB) << std::endl;
 
     std::cout << " ----- " << std::endl;
 
@@ -31,7 +31,7 @@ int main()
     // 대출이 가능할때
     bank.lend(accountA, 829);
 
-    std::cout << bank.getClientAccount(accountA) << std::endl;
+    std::cout << *bank.getClientAccount(accountA) << std::endl;
 
     std::cout << bank << std::endl;
 

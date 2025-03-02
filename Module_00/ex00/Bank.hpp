@@ -16,7 +16,7 @@ public:
 
     // Getter
     const int& getLiquidity() const;
-    const Account& getClientAccount(int id) const;
+    const Account* getClientAccount(int id) const;
     const std::vector<Account*>& getAllClientAccounts() const;
     
 

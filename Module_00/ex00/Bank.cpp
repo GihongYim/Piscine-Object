@@ -13,12 +13,12 @@ const int& Bank::getLiquidity() const {
     return this->liquidity;
 }
 
-const Account& Bank::getClientAccount(int id) const {
+const Account* Bank::getClientAccount(int id) const {
 	if (static_cast<size_t>(id) >= this->clientAccounts.size()) {
 		std::cout << id << " account not found" << std::endl;
 		return NULL;
 	}
-	return *(this->clientAccounts[id]);
+	return this->clientAccounts[id];
 }
 
 const std::vector<Account*>& Bank::getAllClientAccounts() const {
