@@ -7,15 +7,15 @@
 
 class Graph {
 private:
-    int size;
-    std::list<t_Vector2> vector2List;
+    Vector2 size;
+    std::list<Vector2> vector2List;
     char **map;
 
     Graph();
 public:
-    Graph(int _size);
+    Graph(Vector2 _size);
     ~Graph();
-    void addPoint(t_Vector2 vec);
+    void addPoint(Vector2 vec);
     void displayGraph();
 };
 #endif
