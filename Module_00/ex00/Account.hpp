@@ -14,9 +14,12 @@ private:
 public:
     Account(int id);
     
+    //getter
     const int& getId() const;
     const int& getValue() const;
     const int& getLoan() const;
+
+    //setter
     void setValue(int value);
 
     void deposit(int value);

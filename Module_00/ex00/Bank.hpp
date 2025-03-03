@@ -19,7 +19,6 @@ public:
     const Account* getClientAccount(int id) const;
     const std::vector<Account*>& getAllClientAccounts() const;
     
-
     // Setter
     void addLiquidity(int value);
 
@@ -30,7 +29,6 @@ public:
 
     void deposit(int id, int value);
     bool withdraw(int id, int value);
-
 
     void lend(int id, int value);
     void receiveLoan(int id, int value);
