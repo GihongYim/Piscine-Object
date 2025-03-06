@@ -29,6 +29,7 @@ int main()
 
 		// 은행돈을 초과해서 대출할때
 		bank.lend(accountA, 830);
+
 		// 대출이 가능할때
 		bank.lend(accountA, 829);
 
@@ -70,8 +71,24 @@ int main()
 
 		const Account* account = bank.getClientAccount(accountA);
 
+		std::cout << account;
+
 		std::cout << bank << '\n';
 	}
 
-    return 0;
+	std::cout << "----------------------------------------------" << std::endl;
+
+	{
+		Bank bank = Bank(100);
+
+		int accountA = bank.createAccount();
+
+		const Account* account = bank.getClientAccount(accountA);
+
+		std::cout << account;
+
+		std::cout << bank << '\n';
+	}
+
+	return 0;
 }
