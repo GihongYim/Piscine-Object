@@ -7,31 +7,29 @@
 class Bank
 {
 private:
-    int liquidity;
+    double liquidity;
     std::vector<Account *> clientAccounts;
-    int accountIdIndex;
-    Bank();
+    size_t accountIdIndex;
+
 public:
-    Bank(int liquidity);
+    Bank(): liquidity(0.0), clientAccounts(std::vector<Account*>());
+    ~Bank();
 
     // Getter
-    const int& getLiquidity() const;
-    const Account* getClientAccount(int id) const;
-    const std::vector<Account*>& getAllClientAccounts() const;
-    
-    // Setter
-    void addLiquidity(int value);
+    const double& getLiquidity() const;
+    double& getLiquidity();
+    const Account* getClientAccount(size_t id) const;
+    Account* getClientAccount(size_t id);
 
     // Manage Account
-    int createAccount();
-    void modifyAccount(int accountId, int value);
-    void deleteAccount(int accountId);
+    void createAccount();
+    void deleteAccount(size_t accountId);
 
-    void deposit(int id, int value);
-    bool withdraw(int id, int value);
+    void deposit(size_t id, double value);
+    bool withdraw(size_t id, double value);
 
-    void lend(int id, int value);
-    void receiveLoan(int id, int value);
+    void lend(size_t id, double value);
+    void receiveLoan(size_t id, double value);
 };
 
 std::ostream& operator<< (std::ostream& p_os, const Bank& p_bank);

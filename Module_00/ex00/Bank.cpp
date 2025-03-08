@@ -1,19 +1,28 @@
 #include "Bank.hpp"
 #include <iostream>
 
-Bank::Bank(): liquidity(0), accountIdIndex(0) {
+Bank::Bank(): liquidity(0.0), clientAccounts(std::vector<Account*>())
+{
 
 }
 
-Bank::Bank(int liquidity): liquidity(liquidity), accountIdIndex(0) {
-
+Bank::~Bank()
+{
+	for (size_t i = 0; i < clientAccounts.size(); i++) {
+		delete clientAccounts[i];
+		clientAccounts[i] = NULL;
+	}
 }
 
-const int& Bank::getLiquidity() const {
+const double& Bank::getLiquidity() const {
     return this->liquidity;
 }
 
-const Account* Bank::getClientAccount(int id) const {
+double& Bank::getLiquidity(){
+    return this->liquidity;
+}
+
+const Account* Bank::getClientAccount(size_t id) const {
 	if (static_cast<size_t>(id) >= this->clientAccounts.size()) {
 		std::cout << id << " account not found" << std::endl;
 		return NULL;
@@ -21,60 +30,28 @@ const Account* Bank::getClientAccount(int id) const {
 	return this->clientAccounts[id];
 }
 
-const std::vector<Account*>& Bank::getAllClientAccounts() const {
-    return this->clientAccounts;
+Account* Bank::getClientAccount(size_t id) {
+	if (static_cast<size_t>(id) >= this->clientAccounts.size()) {
+		std::cout << id << " account not found" << std::endl;
+		return NULL;
+	}
+	return this->clientAccounts[id];
 }
 
-void Bank::addLiquidity(int money) {
-    if (this->liquidity + money < 0) {
-        std::cout << "bank has no money or reach limit" << std::endl;
-    }
-
-    this->liquidity += money;
-}
-
-int Bank::createAccount() {
+void Bank::createAccount() {
     // index가 INT_MAX를 초과하여 overflow가 발생하였을때
 	// 한번 생성된 Account index는 영원하게 유지 (삭제되어도)
     if (accountIdIndex < 0) {
         std::cout << "You have reached the maximum number of accounts." << std::endl;
-        return -1;
+        return;
     }
 
-    int newAccountId = accountIdIndex;
-    accountIdIndex++;
-
-    Account *newAccount = new Account(newAccountId);
-    for (unsigned int i = 0; i < this->clientAccounts.size(); i++) {
-        if (clientAccounts[i] == NULL) {
-            clientAccounts[i] = newAccount;
-            return newAccountId;
-        }
-    }
+	Account* newAccount = new Account(accountIdIndex++);
     this->clientAccounts.push_back(newAccount);
-    return newAccountId;
+    return;
 }
 
-void Bank::modifyAccount(int id, int value)
-{
-    Account * targetAccount = NULL;
-    for (unsigned int i = 0; i < clientAccounts.size(); i++) {
-        if (clientAccounts[i]->getId() == id) {
-            targetAccount = clientAccounts[i];
-            break;
-        }
-    }
-
-    if (targetAccount == NULL) {
-        std::cout << "Account " <<  id << " not found" << std::endl;
-    } else if (value < 0) {
-        std::cout << "value should be positive" << std::endl;
-	} else {
-        targetAccount->setValue(value);
-    }
-}
-
-void Bank::deleteAccount(int id) {
+void Bank::deleteAccount(size_t id) {
     for (unsigned int i = 0; i < clientAccounts.size(); i++) {
         if (clientAccounts[i] == NULL) continue;
         if (clientAccounts[i]->getId() == id) {
@@ -87,9 +64,7 @@ void Bank::deleteAccount(int id) {
     std::cout << "Account " <<  id << " not found" << std::endl;
 }
 
-
-
-void Bank::deposit(int id, int value) {
+void Bank::deposit(size_t id, double value) {
 
     if (value < 0) {
 		std::cout << "value should be positive" << std::endl;
@@ -113,11 +88,11 @@ void Bank::deposit(int id, int value) {
     int charge = (int)((double)value * 0.05);
 	int remain = value - charge;
 
-	this->addLiquidity(charge);
+	this->liquidity += charge;
 	targetAccount->deposit(remain);
 }
 
-bool Bank::withdraw(int id, int value) {
+bool Bank::withdraw(size_t id, double value) {
     Account *targetAccount = NULL;
 
 	if (value < 0) {
@@ -143,7 +118,7 @@ bool Bank::withdraw(int id, int value) {
 }
 
 
-void Bank::lend(int id, int value) {
+void Bank::lend(size id, double value) {
 	Account *account = NULL;
 
 	if (value < 0) {
@@ -169,7 +144,7 @@ void Bank::lend(int id, int value) {
 	}
 }
 
-void Bank::receiveLoan(int id, int value) {
+void Bank::receiveLoan(size_t id, double value) {
 	Account *account = NULL;
 	if (value < 0) {
 		std::cout << "value should be positive" << std::endl;
@@ -180,7 +155,7 @@ void Bank::receiveLoan(int id, int value) {
 		if (clientAccounts[i] == NULL) continue;
 		if (clientAccounts[i]->getId() == id) {
 			clientAccounts[i]->offLoan(value);
-			this->addLiquidity(value);
+			this->liquidity += value;
 			return;
 		}
 	}

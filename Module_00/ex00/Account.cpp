@@ -1,63 +1,37 @@
 #include "Account.hpp"
 
-Account::Account(): id(-1), value(0), loan(0)
+Account::Account(): id(-1), money(0), loan(0)
 {
 
 }
 
-Account::Account(int id): id(id), value(0), loan(0)
+Account::Account(int id): id(id), money(0), loan(0)
 {
 
 }
 
-const int& Account::getId() const
+size_t Account::getId() const
 {
     return this->id;
 }
 
-const int& Account::getValue() const
+size_t Account::getId()
 {
-    return this->value;
+    return this->id;
 }
 
-const int& Account::getLoan() const
+double Account::getMoney() const
 {
-    return this->loan;
+    return this->money;
 }
 
-void Account::setValue(int value)
+double Account::getMoney()
 {
-    this->value = value;
-}
-
-void Account::deposit(int value)
-{
-    this->value += value;
-}
-
-bool Account::withdraw(int value) {
-	if (value > this->value) {
-		return false;
-	} else {
-		this->value -= value;
-		return true;
-	}
-}
-
-void Account::addLoan(int value) {
-    this->loan += value;
-}
-
-void Account::offLoan(int value){
-    if (value > this->loan) {
-		std::cout << "loan is less than money that you gave (your loan: " << this->loan << ")" << std::endl;
-		return ;
-	}
-	this->loan -= value;
+    return this->money;
 }
 
 std::ostream& operator << (std::ostream& p_os, const Account& p_account)
 {
-    p_os << "[" << p_account.getId() << "] - [" << p_account.getValue() << "] - [" << p_account.getLoan() << "]";
+    p_os << "[" << p_account.getId() << "] - [" << p_account.getMoney() << "] - [" << p_account.getLoan() << "]";
     return (p_os);
 }

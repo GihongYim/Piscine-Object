@@ -6,27 +6,35 @@
 class Account
 {
 private:
-    int id;
-    int value;
+    size_t id;
+    double money;
     int loan;
+    static int accountIndex;
+
 
     Account();
-public:
     Account(int id);
-    
+    Account(const Account& account);
+
+    friend class Bank;
+
+public:
+
     //getter
-    const int& getId() const;
-    const int& getValue() const;
-    const int& getLoan() const;
+    size_t getId() const;
+    size_t getId();
+    double getMoney() const;
+    double getMoney();
+    // const double& getLoan() const;
 
     //setter
-    void setValue(int value);
+    // void setValue(int value);
 
-    void deposit(int value);
-    bool withdraw(int value);
+    // void deposit(int value);
+    // bool withdraw(int value);
 
-    void addLoan(int value);
-    void offLoan(int value);
+    // void addLoan(int value);
+    // void offLoan(int value);
 
 };
 
