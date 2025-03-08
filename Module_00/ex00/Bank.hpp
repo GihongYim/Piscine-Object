@@ -1,35 +1,37 @@
 #ifndef __BANK_HPP__
 #define __BANK_HPP__
 
-#include <vector>
+#include <map>
 #include "Account.hpp"
 
 class Bank
 {
 private:
-    double liquidity;
-    std::vector<Account *> clientAccounts;
-    size_t accountIdIndex;
+    int _liquidity;
+    std::map<int, Account *> _clientAccounts;
+    unsigned int accountIdIndex;
+
+    Bank(Bank const &other);
+    Bank &operator=(Bank const &other);
+    Account* getClientAccount(unsigned int id) const;
 
 public:
-    Bank(): liquidity(0.0), clientAccounts(std::vector<Account*>());
+    Bank(int liquidity = 0);
     ~Bank();
 
-    // Getter
-    const double& getLiquidity() const;
-    double& getLiquidity();
-    const Account* getClientAccount(size_t id) const;
-    Account* getClientAccount(size_t id);
+    const Account& createAccount(int value = 0);
+    void deleteAccount(const Account& account);
+    void lend(const Account& account, unsigned int value);
+    void deposit(unsigned int id, unsigned int value);
+    bool withdraw(unsigned int id, unsigned int value);
+
+    int getLiquidity() const;
+    void setLiquidity(int liquidity);
+
 
     // Manage Account
-    void createAccount();
-    void deleteAccount(size_t accountId);
 
-    void deposit(size_t id, double value);
-    bool withdraw(size_t id, double value);
-
-    void lend(size_t id, double value);
-    void receiveLoan(size_t id, double value);
+    // void receiveLoan(unsigned int id, unsigned int value);
 };
 
 std::ostream& operator<< (std::ostream& p_os, const Bank& p_bank);

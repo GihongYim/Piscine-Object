@@ -79,9 +79,9 @@ int main()
 	std::cout << "----------------------------------------------" << std::endl;
 
 	{
-		Bank bank = Bank(100);
+		Bank bank;
 
-		int accountA = bank.createAccount();
+		Account accountA = bank.createAccount();
 
 		const Account* account = bank.getClientAccount(accountA);
 

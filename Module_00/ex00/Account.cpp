@@ -10,12 +10,12 @@ Account::Account(int id): id(id), money(0), loan(0)
 
 }
 
-size_t Account::getId() const
+unsigned int Account::getId() const
 {
     return this->id;
 }
 
-size_t Account::getId()
+unsigned int Account::getId()
 {
     return this->id;
 }

@@ -11,7 +11,7 @@ struct Account
 		id(-1),
 		value(0)
 	{
-	
+
 	}
 
 	friend std::ostream& operator << (std::ostream& p_os, const Account& p_account)
@@ -24,7 +24,7 @@ struct Account
 struct Bank
 {
 	int liquidity;
-	std::vector<Account *> clientAccounts;
+	std::vector<Account *> _clientAccounts;
 
 	Bank() :
 		liquidity(0)
@@ -36,7 +36,7 @@ struct Bank
 	{
 		p_os << "Bank informations : " << std::endl;
 		p_os << "Liquidity : " << p_bank.liquidity << std::endl;
-		for (auto &clientAccount : p_bank.clientAccounts)
+		for (auto &clientAccount : p_bank._clientAccounts)
         	p_os << *clientAccount << std::endl;
 		return (p_os);
 	}
@@ -54,8 +54,8 @@ int main()
 
 	Bank bank = Bank();
 	bank.liquidity = 999;
-	bank.clientAccounts.push_back(&accountA);
-	bank.clientAccounts.push_back(&accountB);
+	bank._clientAccounts.push_back(&accountA);
+	bank._clientAccounts.push_back(&accountB);
 
 	bank.liquidity -= 200;
 	accountA.value += 400;
