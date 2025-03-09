@@ -8,6 +8,8 @@
 class Graph {
 private:
     Vector2 size;
+    int mapX;
+    int mapY;
     std::list<Vector2> vector2List;
     char **map;
 
