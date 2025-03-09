@@ -1,63 +1,82 @@
 #include <iostream>
 #include "Bank.hpp"
 
+// void leaks()
+// {
+// 	system("leaks divide_and_conquer");
+// }
+
 int main()
 {
+	// atexit(leaks);
 	{
-		Bank bank = Bank(999);
-		std::vector<int> accountIDs;
+		Bank bank = Bank(0);
 
-		int accountA;
-		accountA = bank.createAccount();
+		std::cout << bank << '\n';
+		std::cout << "-------" << std::endl;
+
+		Account& accountA = bank.createAccount();
 		bank.deposit(accountA, 100);
 
-		int accountB;
-		accountB = bank.createAccount();
+		Account& accountB = bank.createAccount();
 		bank.deposit(accountB, 100);
-
-		bank.addLiquidity(-200);
 		bank.deposit(accountA, 400);
 
 		std::cout << "Account: " << std::endl;
-		std::cout << *bank.getClientAccount(accountA) << std::endl;
-		std::cout << *bank.getClientAccount(accountB) << std::endl;
-
-		std::cout << " ----- " << std::endl;
+		std::cout << accountA << std::endl;
+		std::cout << accountB << std::endl;
+	
+		std::cout << "-------" << std::endl;
 
 		std::cout << "Bank : " << std::endl;
 		std::cout << bank << std::endl;
 
+		std::cout << "-------" << std::endl;
+
 		// 은행돈을 초과해서 대출할때
-		bank.lend(accountA, 830);
+		bank.approveLoan(accountA, 830);
 
 		// 대출이 가능할때
-		bank.lend(accountA, 829);
+		bank.approveLoan(accountA, 829);
 
-		std::cout << *bank.getClientAccount(accountA) << std::endl;
+		std::cout << accountA << std::endl;
+
+		std::cout << bank << std::endl;
+
+		bank.collectLoan(accountA, 830);
+
+		bank.collectLoan(accountA, 829);
+
+		std::cout << accountA << std::endl;
 
 		std::cout << bank << std::endl;
 
-		bank.receiveLoan(accountA, 830);
-
-		bank.receiveLoan(accountA, 829);
-
-		std::cout << *bank.getClientAccount(accountA) << std::endl;
-
-		std::cout << bank << std::endl;
-	}
-
-	std::cout << "----------------------------------------------" << std::endl;
-
-	{
-		Bank bank = Bank(100);
-
-		int accountA = bank.createAccount();
-
-		std::cout << *bank.getClientAccount(accountA) << std::endl;
+		bank.deleteAccount(accountA);
 
 		bank.deposit(accountA, 100);
 
-		std::cout << *bank.getClientAccount(accountA) << std::endl;
+		// impossible
+		// {
+			// accountA.deposit(1000);
+		
+			// std::cout << accountA << std::endl;
+
+			// std::cout << bank << std::endl;
+		// }
+	}
+
+	std::cout << "----------------------------------------------" << std::endl;
+
+	{
+		Bank bank = Bank(100);
+
+		Account& accountA = bank.createAccount();
+
+		std::cout << accountA << '\n';
+
+		bank.deposit(accountA, 100);
+
+		std::cout << accountA << std::endl;
 
 		std::cout << bank << std::endl;
 	}
@@ -67,11 +86,9 @@ int main()
 	{
 		Bank bank = Bank(100);
 
-		int accountA = bank.createAccount();
+		Account& accountA = bank.createAccount();
 
-		const Account* account = bank.getClientAccount(accountA);
-
-		std::cout << account;
+		std::cout << accountA;
 
 		std::cout << bank << '\n';
 	}
@@ -81,11 +98,9 @@ int main()
 	{
 		Bank bank;
 
-		Account accountA = bank.createAccount();
+		Account& accountA = bank.createAccount();
 
-		const Account* account = bank.getClientAccount(accountA);
-
-		std::cout << account;
+		std::cout << accountA;
 
 		std::cout << bank << '\n';
 	}

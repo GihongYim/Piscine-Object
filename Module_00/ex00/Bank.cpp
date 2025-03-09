@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <limits.h>
 
-Bank::Bank(int liquidity): _liquidity(liquidity)
+Bank::Bank(int liquidity): _liquidity(liquidity), _accountIdIndex(0)
 {
 
 }
@@ -16,15 +16,18 @@ Bank::~Bank()
 }
 
 
-const Account& Bank::createAccount(int value) {
-	int commision = (int)((double) value * 0.05);
-	Account *account = new Account(value - commision);
+Account& Bank::createAccount() {
+	if (_accountIdIndex < 0) {
+		std::cout << "the number of bank accounts reaches limit\n";
+		static Account invalidAccount(-1);
+		return invalidAccount;
+	}
+	Account *account = new Account(_accountIdIndex++);
 	_clientAccounts[account->getId()] = account;
 	return *account;
 }
 
-
-void Bank::deleteAccount(const Account& account) {
+void Bank::deleteAccount(Account& account) {
 	std::map<int, Account*>::iterator it = _clientAccounts.find(account.getId());
 
 	if (it == _clientAccounts.end()){
@@ -36,8 +39,7 @@ void Bank::deleteAccount(const Account& account) {
 	_clientAccounts.erase(it);
 }
 
-void Bank::lend(Account const &account, unsigned int value) {
-	Account *pAccount = getClientAccount(account.getId());
+void Bank::approveLoan(Account &account, int value) {
 	if (_liquidity < static_cast<int>(value))
 	{
 		std::cout << "bank have no money\n";
@@ -48,109 +50,87 @@ void Bank::lend(Account const &account, unsigned int value) {
 	}
 	else
 	{
-		pAccount->money= pAccount->getMoney() + value;
+		account.money = account.getMoney() + value;
 		_liquidity -= value;
 	}
 }
 
-void Bank::deposit(Account const &account, int value) {
+void Bank::deposit(Account &account, int value) {
 
     if (value < 0) {
 		std::cout << "value should be positive" << std::endl;
 		return;
 	}
 
-    Account* targetAccount = getClientAccount(account.getId());
+	std::map<int, Account*>::iterator iter;
 
+	iter = _clientAccounts.find(account.getId());
+	if (iter == _clientAccounts.end()) {
+		std::cout << account.getId() << " account not found" << std::endl;
+		return;
+	}
 
     int charge = (int)((double)value * 0.05);
 	int remain = value - charge;
 
 	this->_liquidity += charge;
-	targetAccount->deposit(remain);
+	account.deposit(remain);
 }
 
-double& Bank::getLiquidity() const {
-    return this->_liquidity;
-}
-
-const Account* Bank::getClientAccount(unsigned int id) const {
-	if (static_cast<unsigned int>(id) >= this->_clientAccounts.size()) {
-		std::cout << id << " account not found" << std::endl;
-		return NULL;
-	}
-	return this->_clientAccounts[id];
-}
-
-Account* Bank::getClientAccount(unsigned int id) {
-	if (static_cast<unsigned int>(id) >= this->_clientAccounts.size()) {
-		std::cout << id << " account not found" << std::endl;
-		return NULL;
-	}
-	return this->_clientAccounts[id];
-}
-
-
-
-
-
-bool Bank::withdraw(unsigned int id, double value) {
-    Account *targetAccount = NULL;
+bool Bank::withdraw(Account& account, int value) {
 
 	if (value < 0) {
 		std::cout << "value should be positive" << std::endl;
 		return false;
 	}
-	for (unsigned int i = 0; i < this->_clientAccounts.size(); i++) {
-		if (_clientAccounts[i] == NULL) continue;
-		if (this->_clientAccounts[i]->getId() == id) {
-			targetAccount = _clientAccounts[i];
-			break;
-		}
-	}
-	if (targetAccount == NULL) {
-		std::cout << id << " account not found" << std::endl;
+
+	std::map<int, Account*>::iterator iter;
+	iter = _clientAccounts.find(account.getId());
+	if (iter == _clientAccounts.end())
+	{
+		std::cout << account.getId() << " account not found" << std::endl;
 		return false;
 	}
-	if (!targetAccount->withdraw(value)) {
-		std::cout << "Not Enough money" << std::endl;
+	if (!account.withdraw(value)) {
 		return false;
 	}
+
 	return true;
 }
 
+int Bank::getLiquidity() const {
+    return this->_liquidity;
+}
 
-
-
-void Bank::receiveLoan(unsigned int id, double value) {
-	Account *account = NULL;
+void Bank::collectLoan(Account& account, int value)
+ {
 	if (value < 0) {
 		std::cout << "value should be positive" << std::endl;
 		return;
 	}
 
-	for (unsigned int i = 0; i < this->_clientAccounts.size(); i++) {
-		if (_clientAccounts[i] == NULL) continue;
-		if (_clientAccounts[i]->getId() == id) {
-			_clientAccounts[i]->offLoan(value);
-			this->_liquidity += value;
-			return;
-		}
-	}
-	if (account == NULL) {
-		std::cout << id << " account not found" << std::endl;
+	std::map<int, Account*>::iterator iter;
+	iter = _clientAccounts.find(account.getId());
+	if (iter == _clientAccounts.end())
+	{
+		std::cout << account.getId() << " account not found" << std::endl;
 		return;
 	}
+
+	iter->second->repayLoan(value);
+	this->_liquidity += value;
+	return;
 }
 
 std::ostream& operator << (std::ostream& p_os, const Bank& p_bank) {
     p_os << "Bank informations : " << std::endl;
     p_os << "Liquidity : " << p_bank.getLiquidity() << std::endl;
 
-    std::vector<Account*> allClientAccounts;
+	std::map<int, Account*>::const_iterator iter;
 
-    for (unsigned int i = 0; i < allClientAccounts.size(); i++) {
-        p_os << *allClientAccounts[i] << std::endl;
+    for (iter = p_bank._clientAccounts.begin(); iter != p_bank._clientAccounts.end(); iter++)
+	{
+        p_os << *iter->second << std::endl;
     }
 
     return (p_os);

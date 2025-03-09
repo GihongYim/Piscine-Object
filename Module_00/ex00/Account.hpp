@@ -6,38 +6,30 @@
 class Account
 {
 private:
-    size_t id;
-    double money;
+    int id;
+    int money;
     int loan;
-    static int accountIndex;
-
 
     Account();
     Account(int id);
     Account(const Account& account);
 
+    void deposit(int value);
+    bool withdraw(int value);
+
+    void takeLoan(int value);
+    void repayLoan(int value);
+
     friend class Bank;
 
 public:
+    int getId() const;
+    int getId();
+    const int& getMoney() const;
+    const int& getLoan() const;
 
-    //getter
-    size_t getId() const;
-    size_t getId();
-    double getMoney() const;
-    double getMoney();
-    // const double& getLoan() const;
-
-    //setter
-    // void setValue(int value);
-
-    // void deposit(int value);
-    // bool withdraw(int value);
-
-    // void addLoan(int value);
-    // void offLoan(int value);
-
+    
+    friend std::ostream& operator << (std::ostream& p_os, const Account& p_account);
 };
-
-std::ostream& operator << (std::ostream& p_os, const Account& p_account);
 
 #endif
