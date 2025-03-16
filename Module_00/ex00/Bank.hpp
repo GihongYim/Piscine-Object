@@ -24,7 +24,7 @@ public:
     void approveLoan(Account& account, int value);
     void collectLoan(Account& account, int value);
 
-    int getLiquidity() const;
+    const int& getLiquidity() const;
 
     friend std::ostream& operator<< (std::ostream& p_os, const Bank& p_bank);
 };

@@ -103,6 +103,7 @@ int main()
 		std::cout << accountA;
 
 		std::cout << bank << '\n';
+
 	}
 
 	return 0;

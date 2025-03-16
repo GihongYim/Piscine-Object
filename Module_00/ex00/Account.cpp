@@ -10,12 +10,12 @@ Account::Account(int id): id(id), money(0), loan(0)
 
 }
 
-int Account::getId() const
+Account::~Account()
 {
-    return this->id;
+    
 }
 
-int Account::getId()
+const int& Account::getId() const
 {
     return this->id;
 }
@@ -24,6 +24,7 @@ const int& Account::getMoney() const
 {
     return this->money;
 }
+
 const int& Account::getLoan() const 
 {
     return this->loan;

@@ -98,7 +98,7 @@ bool Bank::withdraw(Account& account, int value) {
 	return true;
 }
 
-int Bank::getLiquidity() const {
+const int& Bank::getLiquidity() const {
     return this->_liquidity;
 }
 

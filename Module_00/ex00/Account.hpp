@@ -13,6 +13,7 @@ private:
     Account();
     Account(int id);
     Account(const Account& account);
+    ~Account();
 
     void deposit(int value);
     bool withdraw(int value);
@@ -23,12 +24,10 @@ private:
     friend class Bank;
 
 public:
-    int getId() const;
-    int getId();
+    const int& getId() const;
     const int& getMoney() const;
     const int& getLoan() const;
 
-    
     friend std::ostream& operator << (std::ostream& p_os, const Account& p_account);
 };
 
