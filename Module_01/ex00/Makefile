@@ -1,9 +1,9 @@
-NAME	 =	divide_and_conquer
+NAME	 =	practice
 CXX		 =	c++
 CXXFLAGS = -Wall -Wextra -Werror
 STD98	 = 	-std=c++98
 
-SRCS = Account.cpp Bank.cpp main.cpp
+SRCS = *.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
