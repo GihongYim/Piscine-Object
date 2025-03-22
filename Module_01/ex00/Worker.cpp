@@ -9,7 +9,8 @@ void Worker::giveShovel(Shovel* newShovel)
 {
     if (newShovel) {
         if (newShovel->isOwned()) { 
-
+            Worker* oldWorker = newShovel->isOwned();
+            oldWorker->takeShovel();
         }
         newShovel->setOwner(this);
         shovel = newShovel;

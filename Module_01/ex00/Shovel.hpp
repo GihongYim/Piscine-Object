@@ -1,6 +1,7 @@
 #include "Worker.hpp"
+#include "Tool.hpp"
 
-class Shovel
+class Shovel : public: Tool
 {
 private:
     Worker * worker;
