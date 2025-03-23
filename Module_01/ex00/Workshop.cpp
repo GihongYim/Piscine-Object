@@ -12,7 +12,7 @@ void Workshop::addWorker(Worker *worker) {
     }
 }
 void Workshop::addWorker(std::vector<Worker *> workers){
-    for (int i = 0; i < workers.size(); i++) {
+    for (size_t i = 0; i < workers.size(); i++) {
         this->addWorker(workers[i]);
     }
 }
@@ -30,8 +30,8 @@ void Workshop::dropWorker(Worker *worker){
         this->workList.erase(it);
     }
 }
-void Workshop::excuteWorkDay(){
-    for (int i = 0; i < this->workList.size(); i++) {
+void Workshop::executeWorkDay(){
+    for (size_t i = 0; i < this->workList.size(); i++) {
         if (this->workList[i] == NULL) {
             std::cerr << "Workshop.excuteWorkDay : NULL Worker exists" << std::endl;
         } else {

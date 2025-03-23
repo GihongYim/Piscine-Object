@@ -1,7 +1,13 @@
 #include "Worker.hpp"
 
+Worker::Worker()
+{
+    position = Position();
+    statistic = Statistic();
+}
+
 Worker::~Worker() {
-    for (int i = 0; i < this->tools.size(); i++) {
+    for (size_t i = 0; i < this->tools.size(); i++) {
         tools[i]->changeOwner(NULL);
     }
     this->leaveWorkshop();
@@ -9,11 +15,12 @@ Worker::~Worker() {
 
 void Worker::getTool(Tool *tool) {
     this->tools.push_back(tool);
-    tool->changeOwner(this); 
+    std::cout << "push_back tool\n";
+    tool->changeOwner(this);
 }
 
 void Worker::dropTool(Tool *tool) {
-    for (int i = 0; i < this->tools.size(); i++) {
+    for (size_t i = 0; i < this->tools.size(); i++) {
         if (tool == this->tools[i]) {
             this->tools.erase(this->tools.begin() + i);
             tool->changeOwner(NULL);

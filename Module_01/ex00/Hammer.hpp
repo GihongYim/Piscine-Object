@@ -8,5 +8,5 @@ private:
 
 public:
     Hammer();
-    void use() = 0;
+    void use();
 };
