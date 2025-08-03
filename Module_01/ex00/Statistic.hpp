@@ -1,6 +1,6 @@
 #pragma once
 
-typedef struct s_Statistic {
+struct Statistic {
     int level;
     int exp;
-} Statistic;
+};

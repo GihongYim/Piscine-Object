@@ -7,8 +7,11 @@ SRCS = Tool.cpp Shovel.cpp Hammer.cpp Worker.cpp Workshop.cpp main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
-$(NAME) : $(SRCS)
-	$(CXX) -o $(NAME) $(CXXFLAGS) $(STD98) $(SRCS)
+$(NAME) : $(OBJS)
+	$(CXX) -o $(NAME) $(CXXFLAGS) $(STD98) $(OBJS)
+
+%.o : %.cpp
+	$(CXX) $(CXXFLAGS) $(STD98) -c $< -o $@
 
 all : $(NAME)
 

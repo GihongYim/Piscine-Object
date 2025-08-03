@@ -5,17 +5,13 @@ void Workshop::addWorker(Worker *worker) {
         std::cerr << "Workshop.addWorker : NULL worker added" << std::endl;
         return ;
     }
-    if (find(this->workList.begin(), this->workList.end(), worker) != this->workList.end()) {
+    if (find(this->workList.begin(), this->workList.end(), worker) == this->workList.end()) {
         this->workList.push_back(worker);
     } else {
         std::cerr << "Workshop.addWorker : worker already exist" << std::endl;
     }
 }
-void Workshop::addWorker(std::vector<Worker *> workers){
-    for (size_t i = 0; i < workers.size(); i++) {
-        this->addWorker(workers[i]);
-    }
-}
+
 void Workshop::dropWorker(Worker *worker){
     std::vector<Worker *>::iterator it;
 
@@ -30,6 +26,7 @@ void Workshop::dropWorker(Worker *worker){
         this->workList.erase(it);
     }
 }
+
 void Workshop::executeWorkDay(){
     for (size_t i = 0; i < this->workList.size(); i++) {
         if (this->workList[i] == NULL) {
