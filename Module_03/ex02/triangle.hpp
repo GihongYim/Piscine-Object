@@ -16,7 +16,7 @@ public:
         if (side1 > side2 || side2 > side3 || side1 > side3) {
             throw "sides should be increasing";
         }
-        if (side1 + side2 >= side3) {
+        if (side1 + side2 < side3) {
             throw "side3 > side1 + side2 : is not triangle";
         }
         _side1 = side1;
@@ -27,7 +27,7 @@ public:
         double s = (_side1 + _side2 + _side3) / 2.0;
         double areaSquared = s * (s - _side1) * (s - _side2) * (s - _side3);
         double area = sqrt(areaSquared);
-    
+
         return area;
     }
 
