@@ -1,0 +1,21 @@
+-  Cousse
+    - 
+-  Person
+    - Staff
+        - Headmaster
+        - Secretary
+        - Professor
+    - Student
+-  Form
+    - CourseFinishedForm
+    - NeedMoreClassRoomForm
+    - NeedCourseCreationForm
+    - SubscriptionToCourseForm
+- FormType (enum class)
+- Room
+    - Classroom
+    - SecretarialOffice
+    - HeadmasterOffice
+    - StaffRestRoom
+    - Courtyard
+-  event (enum class)
