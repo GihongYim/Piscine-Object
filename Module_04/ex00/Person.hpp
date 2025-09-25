@@ -15,7 +15,7 @@ private:
 public:
 	// Personne : Typo??
 	// Personne(std::string p_name);
-	Person(std::string p_name);
+	Person(std::string p_name) : _name(p_name), _currentRoom(nullptr) {}
 	Room* room() {return (_currentRoom);}
 };
 
@@ -24,7 +24,7 @@ class Staff : public Person
 private:
 
 public:
-	void sign(Form* p_form);
+	void sign(Form* p_form) { p_form->execute(); }
 };
 
 
@@ -34,7 +34,7 @@ private:
 	std::vector<Course*> _subscribedCourse;
 
 public:
-	void attendClass(Classroom* p_classroom);
+	void attendClass(Classroom* p_classroom) { p_classroom->enter(this); }
 	void exitClass();
 	void graduate(Course* p_course);
 };
