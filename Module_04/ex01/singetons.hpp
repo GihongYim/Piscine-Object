@@ -6,7 +6,7 @@ template <typename T>
 class ObjectList
 {
 public:
-    static ObjectList<T> instance() {
+    static ObjectList<T>& instance() {
         static ObjectList<T> instance;
         return instance;  
     }

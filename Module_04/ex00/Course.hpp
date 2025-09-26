@@ -5,6 +5,9 @@
 #include <vector>
 #include <string>
 
+class Student;
+class Professor;
+
 class Course
 {
 private:

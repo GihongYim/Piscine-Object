@@ -7,14 +7,14 @@
 #include <string>
 #include <vector>
 
+class Course;
+
 class Person
 {
 private:
 	std::string _name;
 	Room* _currentRoom;
 public:
-	// Personne : Typo??
-	// Personne(std::string p_name);
 	Person(std::string p_name) : _name(p_name), _currentRoom(nullptr) {}
 	Room* room() {return (_currentRoom);}
 };
@@ -24,6 +24,7 @@ class Staff : public Person
 private:
 
 public:
+	Staff(std::string p_name) : Person(p_name) {}
 	void sign(Form* p_form) { p_form->execute(); }
 };
 
@@ -34,6 +35,7 @@ private:
 	std::vector<Course*> _subscribedCourse;
 
 public:
+	Student(std::string p_name) : Person(p_name) {}
 	void attendClass(Classroom* p_classroom) { p_classroom->enter(this); }
 	void exitClass();
 	void graduate(Course* p_course);

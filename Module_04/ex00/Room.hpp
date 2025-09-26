@@ -2,6 +2,9 @@
 
 #include "Course.hpp"
 #include "Form.hpp"
+#include "Person.hpp"
+
+class Person;
 
 class Room
 {
@@ -10,7 +13,7 @@ private:
 	std::vector<Person*> _occupants;
 
 public:
-	Room();
+	Room(): ID(0) {}
 	bool canEnter(Person*);
 	void enter(Person*);
 	void exit(Person*);
