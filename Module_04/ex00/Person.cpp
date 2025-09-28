@@ -1,5 +1,6 @@
 #include "Person.hpp"
 
+#include <iostream>
 
 Form* Secretary::createForm(FormType p_formType)
 {
@@ -17,3 +18,13 @@ Form* Secretary::createForm(FormType p_formType)
 			return (nullptr);
 	}
 }
+
+
+void Headmaster::receiveForm(Form* p_form)
+{
+	_formToValidate.push_back(p_form);
+
+	// sign the form
+	p_form->sign();
+}
+

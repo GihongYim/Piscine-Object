@@ -48,6 +48,7 @@ private:
 	std::vector<Form*> _formToValidate;
 	
 public:
+	Headmaster(std::string p_name) : Staff(p_name) {}
 	void receiveForm(Form* p_form);
 };
 
@@ -56,6 +57,7 @@ class Secretary : public Staff
 private:
 
 public:
+	Secretary(std::string p_name) : Staff(p_name) {}
 	Form* createForm(FormType p_formType);
 	void archiveForm();
 };

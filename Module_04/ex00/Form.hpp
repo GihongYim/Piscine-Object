@@ -14,12 +14,16 @@ class Form
 private:
 	FormType _formType;
 
+protected:
+	bool _isSigned;
 public:
 	Form(FormType p_formType)
+		: _formType(p_formType), _isSigned(false)	
 	{
 
 	}
 
+	void sign() { _isSigned = true; }
 	virtual void execute() = 0;
 };
 
