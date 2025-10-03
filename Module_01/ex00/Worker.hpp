@@ -4,8 +4,7 @@
 #include <vector>
 #include "Position.hpp"
 #include "Statistic.hpp"
-#include "Tool.hpp" // Tool* 사용을 위해 필요
-// #include "Workshop.hpp" // 전방 선언으로 충분
+#include "Tool.hpp" 
 
 class Tool;
 class Workshop;
@@ -22,6 +21,7 @@ public:
     void    getTool(Tool *tool);
     void    dropTool(Tool *tool);
     void    work();
+    void    signUpWorkshop(Workshop *workshop);
     void    leaveWorkshop(Workshop *workshop);
 
     template <class ToolType>

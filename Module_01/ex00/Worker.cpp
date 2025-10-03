@@ -15,6 +15,7 @@ Worker::~Worker() {
         workshops[i]->dropWorker(this);
         this->leaveWorkshop(workshops[i]);
     }
+    std::cout << "Worker destructor\n";
 }
 
 void Worker::dropTool(Tool *tool) {
@@ -31,6 +32,22 @@ void Worker::dropTool(Tool *tool) {
 void Worker::work() {
     std::cout << "Worker : work" << std::endl;
 }
+
+void Worker::signUpWorkshop(Workshop *workshop)
+{
+    if (workshop == NULL) {
+        std::cerr << "Worker.signUpWorkshop : NULL workshop added" << std::endl;
+        return ;
+    }
+    
+    if (find(this->workshops.begin(), this->workshops.end(), workshop) == this->workshops.end()) {
+        this->workshops.push_back(workshop);
+        workshop->addWorker(this);
+    } else {
+        std::cerr << "Worker.signUpWorkshop : workshop already exist" << std::endl;
+    }
+}
+
 
 void Worker::leaveWorkshop(Workshop *workshop) {
     for (size_t i = 0; i < this->workshops.size(); i++) {
