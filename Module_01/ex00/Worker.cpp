@@ -30,6 +30,10 @@ void Worker::dropTool(Tool *tool) {
 }
 
 void Worker::work() {
+    if (this->workshops.size() == 0) {
+        std::cerr << "Worker.work : no workshop assigned" << std::endl;
+        return ;
+    }
     std::cout << "Worker : work" << std::endl;
 }
 
@@ -39,7 +43,7 @@ void Worker::signUpWorkshop(Workshop *workshop)
         std::cerr << "Worker.signUpWorkshop : NULL workshop added" << std::endl;
         return ;
     }
-    
+
     if (find(this->workshops.begin(), this->workshops.end(), workshop) == this->workshops.end()) {
         this->workshops.push_back(workshop);
         workshop->addWorker(this);

@@ -28,6 +28,9 @@ void Workshop::dropWorker(Worker *worker){
 }
 
 void Workshop::executeWorkDay(){
+
+    std::cout << "Workshop.executeWorkDay : Start working day" << std::endl;
+
     for (size_t i = 0; i < this->workList.size(); i++) {
         if (this->workList[i] == NULL) {
             std::cerr << "Workshop.excuteWorkDay : NULL Worker exists" << std::endl;
