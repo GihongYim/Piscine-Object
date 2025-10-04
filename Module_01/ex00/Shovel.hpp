@@ -8,5 +8,6 @@ private:
 
 public:
     Shovel();
+    ~Shovel();
     void use();
 };

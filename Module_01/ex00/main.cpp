@@ -75,15 +75,18 @@
 int main()
 {
 	Workshop workshop;
-
+	std::cout << "1st workday" << std::endl;
 	workshop.executeWorkDay();
 
-	Worker * worker1 = new Worker();
+	Worker *worker1 = new Worker();
 	worker1->work();
 
-	Tool * shovel = new Shovel();
+	Tool *shovel = new Shovel();
 	worker1->getTool(shovel);
 
+	workshop.addWorker(worker1);
+
+	std::cout << "2nd workday" << std::endl;
 	workshop.executeWorkDay();
 
 	Worker *worker2 = new Worker();
@@ -91,8 +94,24 @@ int main()
 
 	workshop.addWorker(worker2);
 
+	workshop.addWorker(worker1); // add exist worker
+
+	std::cout << "3rd workday" << std::endl;
 	workshop.executeWorkDay();
 
+	workshop.dropWorker(worker2);
+
+	std::cout << "4th workday" << std::endl;
+	workshop.executeWorkDay();
+
+	workshop.dropWorker(worker1);
+	// delete not exist in workList
+
+	std::cerr << "delete not exist in workList" << std::endl;
+	workshop.dropWorker(worker2);
+
+	std::cout << "5th workday" << std::endl;
+	workshop.executeWorkDay();
 
 	return 0;
 }

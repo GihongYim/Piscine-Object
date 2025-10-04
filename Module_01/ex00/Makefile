@@ -1,7 +1,7 @@
-NAME	=	module01
-CXX		=	c++
+NAME		=	module01
+CXX			=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror
-STD98	= 	-std=c++98
+STD98		= 	-std=c++98
 
 SRCS = Tool.cpp Shovel.cpp Hammer.cpp Worker.cpp Workshop.cpp main.cpp
 
