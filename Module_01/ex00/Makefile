@@ -25,4 +25,4 @@ re 	:
 	make fclean
 	make all
 
-.PYONY : all re clean fclean
+.PHONY : all re clean fclean
