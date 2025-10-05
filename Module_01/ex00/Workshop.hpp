@@ -15,6 +15,6 @@ public:
     Workshop();
     ~Workshop();
     void addWorker(Worker *worker);
-    void dropWorker(Worker *worker);
+    void dropWorker(Worker *worker, bool changeWorker = true);
     void executeWorkDay();
 };

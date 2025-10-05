@@ -1,9 +1,17 @@
 #include "Tool.hpp"
 
-void Tool::changeOwner(Worker *newOwner) {
-    if (this->owner == newOwner) return;
-    if (this->owner != NULL) {
-        this->owner->dropTool(this);
+void Tool::changeOwner(Worker *newOwner, bool notifyWorker) {
+    if (this->owner == newOwner) 
+        return;
+    
+    Worker *oldOwner = owner;
+    owner = newOwner;
+
+    if (oldOwner && notifyWorker) {
+        oldOwner->dropTool(this, false);
     }
-    this->owner = newOwner;
+    if (newOwner && notifyWorker) {
+        newOwner->getTool(this, false);
+    }
+    
 }

@@ -11,6 +11,6 @@ protected:
     Worker *owner;
 public:
     virtual ~Tool() {}
-    void changeOwner(Worker *newOwner);
+    void changeOwner(Worker *newOwner, bool notifyWorker);
     virtual void use() = 0;
 };

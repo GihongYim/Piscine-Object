@@ -18,11 +18,12 @@ private:
 public:
     Worker();
     ~Worker();
-    void    getTool(Tool *tool);
-    void    dropTool(Tool *tool);
+    void    getTool(Tool *tool, bool notifyTool = true);
+    void    addTool(Tool *tool);
+    void    dropTool(Tool *tool, bool notifyTool = true);
     void    work();
     void    signUpWorkshop(Workshop *workshop);
-    void    leaveWorkshop(Workshop *workshop);
+    void    leaveWorkshop(Workshop *workshop, bool changeWorkshop);
 
     template <class ToolType>
     ToolType* getTool();

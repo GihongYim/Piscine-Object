@@ -21,7 +21,7 @@ void Workshop::addWorker(Worker *worker) {
     }
 }
 
-void Workshop::dropWorker(Worker *worker){
+void Workshop::dropWorker(Worker *worker, bool changeWorker){
     std::vector<Worker *>::iterator it;
 
     if (worker == NULL) {
@@ -29,10 +29,12 @@ void Workshop::dropWorker(Worker *worker){
         return ;
     }
     it = find(this->workList.begin(), this->workList.end(), worker);
-    if (it == this->workList.end()) {
-        std::cerr << "Workshop.dropWorker : worker does not exist" << std::endl;
-    } else {
+    if (it != this->workList.end()) {
         this->workList.erase(it);
+        if (changeWorker == true) worker->leaveWorkshop(this, false);
+        std::cout << "Workshop.dropWorker : worker removed" << std::endl;
+    } else {
+        std::cerr << "Workshop.dropWorker : worker does not exist" << std::endl;
     }
 }
 

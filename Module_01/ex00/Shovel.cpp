@@ -8,6 +8,7 @@ Shovel::Shovel()
 }
 
 Shovel::~Shovel() {
+    this->owner = NULL;
     std::cout << "Shovel destructor\n";
 }
 

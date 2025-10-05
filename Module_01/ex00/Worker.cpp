@@ -9,24 +9,33 @@ Worker::Worker()
 }
 
 Worker::~Worker() {
-    for (size_t i = 0; i < this->tools.size(); i++) {
-        tools[i]->changeOwner(NULL);
+    while (!workshops.empty()) {
+        workshops.back()->dropWorker(this, false);
     }
-    for (size_t i = 0; i < this->workshops.size(); i++) {
-        workshops[i]->dropWorker(this);
-        this->leaveWorkshop(workshops[i]);
+
+    while (!tools.empty()) {
+        tools.back()->changeOwner(NULL, false);
     }
+
     std::cout << "Worker destructor\n";
 }
 
-void Worker::dropTool(Tool *tool) {
-    std::vector<Tool *>::iterator it = std::find(tools.begin(), tools.end(), tool);
-    if (it != tools.end()) {
-        tools.erase(it);
-        std::cerr << "Worker.dropTool : tool removed\n";
+void Worker::addTool(Tool *tool) {
+
+    if (std::find(this->tools.begin(), this->tools.end(), tool) == this->tools.end()) {
+        this->tools.push_back(tool);
+        std::cerr << "Worker.addTool : tool added" << std::endl;
     } else {
-        std::cerr << "Worker.dropTool : tool not found \n";
+        std::cerr << "Worker.addTool : tool already exists" << std::endl;
     }
+}
+
+void Worker::dropTool(Tool *tool, bool notifyTool) {
+    std::vector<Tool*>::iterator it = std::find(tools.begin(), tools.end(), tool);
+    if (it != tools.end())
+        tools.erase(it);
+    if (tool && notifyTool)
+        tool->changeOwner(NULL, false);
 }
 
 void Worker::work() {
@@ -34,7 +43,7 @@ void Worker::work() {
         std::cerr << "Worker.work : no workshop assigned" << std::endl;
         return ;
     }
-    std::cout << "Worker : work" << std::endl;
+    std::cout << "Worker.work : working" << std::endl;
 }
 
 void Worker::signUpWorkshop(Workshop *workshop)
@@ -52,28 +61,20 @@ void Worker::signUpWorkshop(Workshop *workshop)
     }
 }
 
-
-void Worker::leaveWorkshop(Workshop *workshop) {
-    for (size_t i = 0; i < this->workshops.size(); i++) {
-        if (this->workshops[i] == workshop) {
-            this->workshops.erase(this->workshops.begin() + i);
-            return ;
-        }
+void Worker::leaveWorkshop(Workshop *workshop, bool changeWorkshop) {
+    std::vector<Workshop *>::iterator it = std::find(this->workshops.begin(), this->workshops.end(), workshop);
+    if (it != this->workshops.end()) {
+        this->workshops.erase(it);
+        std::cout << "Worker.leaveWorkshop : workshop removed" << std::endl;
+        if (changeWorkshop) workshop->dropWorker(this, false);
+    } else {
+        std::cout << "Worker.leaveWorkshop : workshop not found" << std::endl;
     }
-    std::cout << "Worker : leaveWorkshop : workshop not found" << std::endl;
 }
 
-void Worker::getTool(Tool *tool) {
-    if (!tool) {
-        std::cerr << "Worker.getTool : NULL tool added" << std::endl;
-        return ;
-    }
-    if (find(this->tools.begin(), this->tools.end(), tool) != this->tools.end()) {
-        std::cerr << "Worker.getTool : tool already exist" << std::endl;
-        return ;
-    } else {
-        this->tools.push_back(tool);
-        tool->changeOwner(this);
-    }
-    std::cout << "Worker : getTool" << std::endl;
+void Worker::getTool(Tool* tool, bool notifyTool) {
+        if (tool && std::find(tools.begin(), tools.end(), tool) == tools.end())
+            tools.push_back(tool);
+        if (tool && notifyTool)
+            tool->changeOwner(this, false);
 }

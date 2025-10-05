@@ -3,6 +3,7 @@
 Hammer::Hammer() {
     this->numberOfUses = 0;
     this->owner = NULL;
+    std::cout << "Hammer constructor\n";
 }
 void Hammer::use() {
     (this->numberOfUses)++;
