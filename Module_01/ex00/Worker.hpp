@@ -11,7 +11,7 @@ class Workshop;
 
 class Worker {
 private:
-    Position position;
+    Position coordonnee;
     Statistic statistic;
     std::vector<Tool*> tools;
     std::vector<Workshop*> workshops;
