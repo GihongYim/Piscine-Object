@@ -110,8 +110,13 @@ int main()
 	std::cerr << "delete not exist in workList" << std::endl;
 	workshop.dropWorker(worker2);
 
+	worker1->signUpWorkshop(&workshop);
+
 	std::cout << "5th workday" << std::endl;
 	workshop.executeWorkDay();
 
+	delete worker1;
+	delete worker2;
+	delete shovel;
 	return 0;
 }

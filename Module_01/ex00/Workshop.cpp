@@ -15,7 +15,8 @@ void Workshop::addWorker(Worker *worker, bool changeWorker) {
     }
     if (find(this->workList.begin(), this->workList.end(), worker) == this->workList.end()) {
         this->workList.push_back(worker);
-        if (changeWorker) worker->signUpWorkshop(this, false);
+        if (changeWorker) 
+            worker->signUpWorkshop(this, false);
         std::cout << "Workshop.addWorker : worker added" << std::endl;
     } else {
         std::cerr << "Workshop.addWorker : worker already exist" << std::endl;
@@ -32,7 +33,8 @@ void Workshop::dropWorker(Worker *worker, bool changeWorker){
     it = find(this->workList.begin(), this->workList.end(), worker);
     if (it != this->workList.end()) {
         this->workList.erase(it);
-        if (changeWorker == true) worker->leaveWorkshop(this, false);
+        if (changeWorker) 
+            worker->leaveWorkshop(this, false);
         std::cout << "Workshop.dropWorker : worker removed" << std::endl;
     } else {
         std::cerr << "Workshop.dropWorker : worker does not exist" << std::endl;

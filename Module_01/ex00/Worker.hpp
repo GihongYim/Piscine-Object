@@ -18,8 +18,8 @@ private:
 public:
     Worker();
     ~Worker();
+
     void    getTool(Tool *tool, bool notifyTool = true);
-    void    addTool(Tool *tool);
     void    dropTool(Tool *tool, bool notifyTool = true);
     void    work();
     void    signUpWorkshop(Workshop *workshop, bool changeWorkshop = true);

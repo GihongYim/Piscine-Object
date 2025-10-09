@@ -10,7 +10,8 @@ protected:
     int numberOfUses;
     Worker *owner;
 public:
-    virtual ~Tool() {}
+    Tool();
+    virtual ~Tool();
     void changeOwner(Worker *newOwner, bool notifyWorker);
     virtual void use() = 0;
 };
