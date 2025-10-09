@@ -22,8 +22,8 @@ public:
     void    addTool(Tool *tool);
     void    dropTool(Tool *tool, bool notifyTool = true);
     void    work();
-    void    signUpWorkshop(Workshop *workshop);
-    void    leaveWorkshop(Workshop *workshop, bool changeWorkshop);
+    void    signUpWorkshop(Workshop *workshop, bool changeWorkshop = true);
+    void    leaveWorkshop(Workshop *workshop, bool changeWorkshop = true);
 
     template <class ToolType>
     ToolType* getTool();

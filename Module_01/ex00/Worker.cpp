@@ -1,5 +1,6 @@
 #include "Worker.hpp"
 #include "Workshop.hpp"
+#include <algorithm>
 
 Worker::Worker()
 {
@@ -46,7 +47,7 @@ void Worker::work() {
     std::cout << "Worker.work : working" << std::endl;
 }
 
-void Worker::signUpWorkshop(Workshop *workshop)
+void Worker::signUpWorkshop(Workshop *workshop, bool changeWorkshop)
 {
     if (workshop == NULL) {
         std::cerr << "Worker.signUpWorkshop : NULL workshop added" << std::endl;
@@ -55,7 +56,7 @@ void Worker::signUpWorkshop(Workshop *workshop)
 
     if (find(this->workshops.begin(), this->workshops.end(), workshop) == this->workshops.end()) {
         this->workshops.push_back(workshop);
-        workshop->addWorker(this);
+        if (changeWorkshop) workshop->addWorker(this);
     } else {
         std::cerr << "Worker.signUpWorkshop : workshop already exist" << std::endl;
     }
@@ -76,5 +77,5 @@ void Worker::getTool(Tool* tool, bool notifyTool) {
         if (tool && std::find(tools.begin(), tools.end(), tool) == tools.end())
             tools.push_back(tool);
         if (tool && notifyTool)
-            tool->changeOwner(this, false);
+            tool->changeOwner(this, true);
 }

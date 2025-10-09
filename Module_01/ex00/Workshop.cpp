@@ -8,13 +8,14 @@ Workshop::~Workshop() {
     std::cout << "Workshop destructed" << std::endl;
 }
 
-void Workshop::addWorker(Worker *worker) {
+void Workshop::addWorker(Worker *worker, bool changeWorker) {
     if (worker == NULL) {
         std::cerr << "Workshop.addWorker : NULL worker added" << std::endl;
         return ;
     }
     if (find(this->workList.begin(), this->workList.end(), worker) == this->workList.end()) {
         this->workList.push_back(worker);
+        if (changeWorker) worker->signUpWorkshop(this, false);
         std::cout << "Workshop.addWorker : worker added" << std::endl;
     } else {
         std::cerr << "Workshop.addWorker : worker already exist" << std::endl;
