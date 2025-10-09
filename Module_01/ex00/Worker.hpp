@@ -12,7 +12,7 @@ class Workshop;
 class Worker {
 private:
     Position coordonnee;
-    Statistic statistic;
+    Statistic stat;
     std::vector<Tool*> tools;
     std::vector<Workshop*> workshops;
 public:

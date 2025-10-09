@@ -6,7 +6,7 @@ Worker::Worker()
 {
     std::cout << "Worker constructor\n";
     coordonnee = Position();
-    statistic = Statistic();
+    stat = Statistic();
 }
 
 Worker::~Worker() {
