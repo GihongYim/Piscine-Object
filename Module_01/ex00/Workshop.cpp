@@ -27,7 +27,7 @@ void Workshop::dropWorker(Worker *worker, bool changeWorker){
     std::vector<Worker *>::iterator it;
 
     if (worker == NULL) {
-        std::cerr << "Workshop.dropWorker : NULL worker added" << std::endl;
+        std::cerr << "Workshop.dropWorker : NULL worker does not exist" << std::endl;
         return ;
     }
     it = find(this->workList.begin(), this->workList.end(), worker);

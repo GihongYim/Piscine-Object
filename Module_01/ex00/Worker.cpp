@@ -11,7 +11,7 @@ Worker::Worker()
 
 Worker::~Worker() {
     while (!workshops.empty()) {
-        workshops.back()->dropWorker(this, false);
+        workshops.back()->dropWorker(this, true);
     }
 
     while (!tools.empty()) {
