@@ -105,8 +105,8 @@ int main()
 	workshop.executeWorkDay();
 
 	workshop.dropWorker(worker1);
-	// delete not exist in workList
 
+	// delete not exist in workList
 	std::cerr << "delete not exist in workList" << std::endl;
 	workshop.dropWorker(worker2);
 
